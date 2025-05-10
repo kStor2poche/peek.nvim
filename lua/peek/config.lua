@@ -55,9 +55,7 @@ end
 function module.setup(incoming)
   incoming = incoming or {}
 
-  vim.validate({
-    config = { incoming, 'table' },
-  })
+  vim.validate('config', incoming, 'table')
 
   vim.validate({
     close_on_bdelete = { incoming.close_on_bdelete, 'boolean', true },
