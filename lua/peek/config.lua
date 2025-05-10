@@ -57,18 +57,16 @@ function module.setup(incoming)
 
   vim.validate('config', incoming, 'table')
 
-  vim.validate({
-    close_on_bdelete = { incoming.close_on_bdelete, 'boolean', true },
-    auto_load = { incoming.auto_load, 'boolean', true },
-    syntax = { incoming.syntax, 'boolean', true },
-    theme = { incoming.theme, optional(one_of({ 'dark', 'light' })), '"dark" or "light"' },
-    update_on_change = { incoming.update_on_change, 'boolean', true },
-    throttle_at = { incoming.throttle_at, 'number', true },
-    throttle_time = { incoming.throttle_time, optional(one_of({ 'auto', of_type('number') })), '"auto" or number' },
-    app = { incoming.app, optional(one_of({ of_type('string'), every(of_type('string')) })), 'string or string[]' },
-    filetype = { incoming.filetype, optional(every(of_type('string'))), 'string[]' },
-    user_style = { incoming.user_style, optional(of_type('string')), 'string' },
-  })
+  vim.validate('close_on_bdelete', incoming.close_on_bdelete, 'boolean', true)
+  vim.validate('auto_load', incoming.auto_load, 'boolean', true)
+  vim.validate('syntax', incoming.syntax, 'boolean', true)
+  vim.validate('theme', incoming.theme, optional(one_of({ 'dark', 'light' })), '"dark" or "light"')
+  vim.validate('update_on_change', incoming.update_on_change, 'boolean', true)
+  vim.validate('throttle_at', incoming.throttle_at, 'number', true)
+  vim.validate('throttle_time', incoming.throttle_time, optional(one_of({ 'auto', of_type('number') })), '"auto" or number')
+  vim.validate('app', incoming.app, optional(one_of({ of_type('string'), every(of_type('string')) })), 'string or string[]')
+  vim.validate('filetype', incoming.filetype, optional(every(of_type('string'))), 'string[]')
+  vim.validate('user_style', incoming.user_style, optional(of_type('string')), 'string')
 
   config = vim.tbl_extend('force', config, incoming)
 end
